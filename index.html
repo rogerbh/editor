@@ -1,0 +1,113 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Teste tamanho folhas</title>
+    <meta name="description" content="Teste tamanho folhas">
+    <meta name="author" content="Rogério">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
+        crossorigin="anonymous"></script>
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            background: #ddd;
+            min-height: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .hold-btns {
+            position: relative;
+            float: left;
+            width: 100%;
+            background-color: #eee;
+            border-bottom: solid 1px #bbb;
+            padding: 15px;
+            text-align: center;
+        }
+
+        /* .hold-btns button{float: left;} */
+        .hold-folha {
+            width: 100%;
+            flex: 1;
+            margin: 0;
+            padding: 35px;
+            overflow: auto;
+            background: #fefefe;
+            border: solid 1px #ddd;
+
+        }
+
+        #folhaA5 {
+            width: 1748px;
+            height: 2480px;
+            margin: 0 auto;
+            background: indianred;
+            transition: all 200ms ease-out;
+            transform-origin: left top;
+            transform: scale(1);
+        }
+    </style>
+</head>
+
+<body>
+    <input class="input-val" type="hidden" value="10" />
+    <div class="hold-btns">
+        <button class="mais-zoom">+</button>
+        <button class="menos-zoom">-</button>
+    </div>
+    <div class="hold-folha">
+        <div id="folhaA5">
+            <p style="font-size:16px;">
+                Algum texto aqui
+            </p>
+        </div>
+    </div>
+    <script>
+        $('body').on('click', '.menos-zoom', function () {
+            var i = $('.input-val').val();
+            if (i > 1) {
+                $('#folhaA5').css('transform', 'scale(0.' + (--i) + ')');
+                $('.input-val').val(i);
+            }
+            else {
+                $('#folhaA5').css('transform', 'scale(0.' + (i) + ')');
+            }
+
+        });
+        $('body').on('click', '.mais-zoom', function () {
+            var i = $('.input-val').val();
+            if (i < 20) {
+                //alert('i é menor que 20? ' + i);
+                if (i < 10) {
+                    //alert('i é menor que 10? ' + i);
+                    $('#folhaA5').css('transform', 'scale(0.' + (++i) + ')');
+                    $('.input-val').val(i);
+                }
+                else if (i === 10) {
+                    //alert('i é igual a 10?  ' + i);
+                    $('#folhaA5').css('transform', 'scale(1)');
+                    $('.input-val').val(i);
+                }
+                else if (i >= 10 && i < 20) {
+                    //alert('i é maior que 10 e menor que 20? ' + i);
+                    var iConv = i.toString();
+                    var iConvNum = parseInt(iConv.slice(0,1));
+                    $('#folhaA5').css('transform', 'scale(1.' + (++iConvNum) + ')');
+                    $('.input-val').val(i);
+                }
+            }
+
+
+        });
+    </script>
+</body>
+
+</html>
